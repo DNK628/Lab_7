@@ -1,59 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Lecture8.Example4
+﻿namespace Lecture8.Example1
 {
-    class Employee
-    {
-        public string Name { get; set; }
-        public string Position { get; set; }
-
-        public Employee(string name, string position)
-        {
-            Name = name;
-            Position = position;
-        }
-
-        public override string ToString()
-        {
-            return $"{Name} - {Position}";
-        }
-    }
-
-    class GenericList<T> where T : class
-    {
-        private List<T> items = new List<T>();
-
-        public void Add(T item)
-        {
-            items.Add(item);
-        }
-
-        public void Remove(T item)
-        {
-            items.Remove(item);
-        }
-
-        public void DisplayAll()
-        {
-            foreach (var item in items)
-            {
-                Console.WriteLine(item);
-            }
-        }
-    }
-
     class Program
     {
+        static void Swap<T>(ref T lhs, ref T rhs)
+        {
+            T temp = lhs;
+            lhs = rhs;
+            rhs = temp;
+        }
+
         static void Main(string[] args)
         {
-            var employees = new GenericList<Employee>();
+            int a = 1;
+            int b = 2;
+            Swap(ref a, ref b);
+            Console.WriteLine($"int: a={a}, b={b}");
 
-            employees.Add(new Employee("Джордж", "Менеджер"));
-            employees.Add(new Employee("Джейн", "Розробник"));
+            double x = 1.5;
+            double y = 2.5;
+            Swap(ref x, ref y);
+            Console.WriteLine($"double: x={x}, y={y}");
 
-            Console.WriteLine("Employee List:");
-            employees.DisplayAll();
+            string str1 = "Hello";
+            string str2 = "World";
+            Swap(ref str1, ref str2);
+            Console.WriteLine($"string: str1={str1}, str2={str2}");
 
             Console.ReadKey();
         }
